@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Group information -->
+	<groupId>br.com.jpe</groupId>
+	<artifactId>pDraw</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- Project metadata -->
+	<name>pDraw</name>
+	<description>A simple drawing tool, powered by Processing sketchbook framework.</description>
+
+	<!-- Project properties -->
+	<properties>
+		<java.version>11</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<!-- Libs versions -->
+		<processing.version>3.2.3</processing.version>
+	</properties>
+
+
+	<dependencies>
+		<!--
+			CORE (Processing) dependencies
+		 -->
+
+		<!-- Core requirements -->
+		<dependency>
+			<groupId>org.processing</groupId>
+			<artifactId>core</artifactId>
+			<version>${processing.version}</version>
+		</dependency>
+
+		<!--
+			CORE (Utils) dependencies
+		 -->
+
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins></plugins>
+	</build>
+
+</project>
