@@ -74,7 +74,7 @@ public class Application extends PApplet {
                     drawingShape.ifPresent(shape -> drawingShape = Optional.empty());
                 }).build();
 
-        drawCircleButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(20).y(20).text("Círculo")
+        drawCircleButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(20).y(20).text("Bolinha")
                 .onClick(evt -> {
                     drawingShape.ifPresentOrElse(shape -> {
                         drawingShape = Optional.empty();

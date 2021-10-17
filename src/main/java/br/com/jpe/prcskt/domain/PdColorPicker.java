@@ -102,8 +102,6 @@ public class PdColorPicker implements AppRenderListener, AppMouseListener {
         if (evtY > endY || evtX > endX)
             return;
 
-        System.out.printf("EVT: x=%d, y=%d \n", evtX, evtY);
-
         final int eachCSize = height / numberOfLines;
 
         int idx = (evtX - iniX) / eachCSize;
