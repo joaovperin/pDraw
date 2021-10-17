@@ -2,12 +2,10 @@ package br.com.jpe.prcskt.infra;
 
 public interface AppPositionedObject extends AppObject {
 
-    public int getX();
+    public void move(int x, int y);
 
-    public int getY();
+    public void grow();
 
-    public void setX(int x);
-
-    public void setY(int y);
+    public void shrink();
 
 }

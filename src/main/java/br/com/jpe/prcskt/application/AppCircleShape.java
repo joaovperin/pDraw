@@ -11,7 +11,7 @@ import processing.core.PApplet;
 @ToString(callSuper = true)
 public class AppCircleShape extends AppShape implements AppRenderListener {
 
-    final int radius;
+    int radius;
 
     @Override
     public void handleDraw(PApplet g) {
@@ -23,6 +23,16 @@ public class AppCircleShape extends AppShape implements AppRenderListener {
         g.ellipse(x, y, radius, radius);
 
         g.popStyle();
+    }
+
+    @Override
+    public void grow() {
+        this.radius += 5;
+    }
+
+    @Override
+    public void shrink() {
+        this.radius -= 5;
     }
 
 }

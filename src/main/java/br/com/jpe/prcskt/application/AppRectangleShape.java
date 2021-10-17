@@ -13,9 +13,9 @@ import processing.core.PApplet;
 public class AppRectangleShape extends AppShape implements AppRenderListener {
 
     @Builder.Default
-    final int height = 100;
+    int height = 100;
     @Builder.Default
-    final int width = 100;
+    int width = 100;
 
     @Builder.Default
     private boolean isVisible = true;
@@ -29,6 +29,18 @@ public class AppRectangleShape extends AppShape implements AppRenderListener {
         g.rect(x, y, width, height);
 
         g.popStyle();
+    }
+
+    @Override
+    public void grow() {
+        this.height += 5;
+        this.width += 5;
+    }
+
+    @Override
+    public void shrink() {
+        this.height -= 5;
+        this.width -= 5;
     }
 
 }

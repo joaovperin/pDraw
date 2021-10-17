@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import javax.swing.SwingUtilities;
+
 import br.com.jpe.prcskt.application.AppCircleShape;
 import br.com.jpe.prcskt.application.AppColor;
 import br.com.jpe.prcskt.application.AppRectangleShape;
@@ -17,6 +19,7 @@ import br.com.jpe.prcskt.infra.AppObject;
 import br.com.jpe.prcskt.infra.AppPositionedObject;
 import br.com.jpe.prcskt.infra.AppRenderListener;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
@@ -56,6 +59,11 @@ public class Application extends PApplet {
 
     @Override
     public void setup() {
+        // Window setup
+        SwingUtilities.invokeLater(() -> {
+            getSurface().setTitle("pDraw");
+        });
+
         hud = PdHud.builder().width(SCREEN_WIDTH).height(80).build();
 
         final int colorPickerStart = middleX, colorPickerMaxWid = 300;
@@ -63,9 +71,7 @@ public class Application extends PApplet {
 
         canvas = PdCanvas.builder().width(SCREEN_WIDTH).height(SCREEN_HEIGHT - hud.getHeight()).x(0).y(hud.getHeight())
                 .onClick(() -> {
-                    drawingShape.ifPresent(shape -> {
-                        drawingShape = Optional.empty();
-                    });
+                    drawingShape.ifPresent(shape -> drawingShape = Optional.empty());
                 }).build();
 
         drawCircleButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(20).y(20).text("Círculo")
@@ -132,16 +138,25 @@ public class Application extends PApplet {
         appObjectsParallelStream().filter(e -> e instanceof AppMouseListener)
                 .forEach(e -> ((AppMouseListener) e).handleMouseMoved(this, event));
 
-        drawingShape.ifPresent(shape -> {
-            shape.setX(event.getX());
-            shape.setY(event.getY());
-        });
+        drawingShape.ifPresent(shape -> shape.move(event.getX(), event.getY()));
     }
 
     @Override
     public void mouseDragged(MouseEvent event) {
         appObjectsParallelStream().filter(e -> e instanceof AppMouseListener)
                 .forEach(e -> ((AppMouseListener) e).handleMouseDragged(this, event));
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        final var key = event.getKey();
+        if (event.isControlDown()) {
+            if (key == '+') {
+                drawingShape.ifPresent(shape -> shape.grow());
+            } else if (key == '-') {
+                drawingShape.ifPresent(shape -> shape.shrink());
+            }
+        }
     }
 
     private Stream<AppObject> appObjectsStream() {

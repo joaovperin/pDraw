@@ -5,8 +5,6 @@ import java.util.Optional;
 import br.com.jpe.prcskt.infra.AppPositionedObject;
 import br.com.jpe.prcskt.infra.OnMouseCallback;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
@@ -14,12 +12,7 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper = true)
 public abstract class AppShape implements AppPositionedObject {
 
-    @Setter
-    @Getter
     int x;
-
-    @Setter
-    @Getter
     int y;
 
     @Builder.Default
@@ -38,6 +31,12 @@ public abstract class AppShape implements AppPositionedObject {
 
     public final Optional<OnMouseCallback> getOnHover() {
         return Optional.ofNullable(onHover);
+    }
+
+    @Override
+    public void move(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
 }
