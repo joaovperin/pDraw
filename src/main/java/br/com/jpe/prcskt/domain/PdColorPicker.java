@@ -88,7 +88,7 @@ public class PdColorPicker implements AppRenderListener, AppMouseListener {
     }
 
     @Override
-    public void handleMouseClicked(PApplet applet, MouseEvent event) {
+    public void handleMouseReleased(PApplet applet, MouseEvent event) {
         final var evtX = event.getX();
         final var evtY = event.getY();
 
@@ -115,19 +115,6 @@ public class PdColorPicker implements AppRenderListener, AppMouseListener {
         } else if (event.getButton() == PConstants.RIGHT) {
             selectColorBottom = selectedColor;
         }
-
     }
-
-    // private boolean intersects(MouseEvent event) {
-    // final int endX = x + width;
-    // final int endY = y + height;
-
-    // if (event.getX() >= x && event.getX() <= endX) {
-    // if (event.getY() >= y && event.getY() <= endY) {
-    // return true;
-    // }
-    // }
-    // return false;
-    // }
 
 }

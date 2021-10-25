@@ -20,7 +20,7 @@ public class AppRectangularButton extends AppRectangleShape implements AppMouseL
     @Builder.Default
     final int height = 40;
     @Builder.Default
-    final int width = 120;
+    final int width = 100;
 
     final String text;
 
@@ -78,21 +78,16 @@ public class AppRectangularButton extends AppRectangleShape implements AppMouseL
     }
 
     public void handleMouseReleased(PApplet applet, MouseEvent event) {
+        final var intersects = intersects(event);
         isClicked = false;
-        isHovered = intersects(event);
-    }
-
-    public void handleMouseClicked(PApplet applet, MouseEvent event) {
-        if (intersects(event)) {
+        isHovered = intersects;
+        if (intersects) {
             getOnClick().ifPresent(e -> e.onMouse(event));
         }
     }
 
     public void handleMouseMoved(PApplet applet, MouseEvent event) {
         isHovered = intersects(event);
-        if (isHovered) {
-            getOnHover().ifPresent(e -> e.onMouse(event));
-        }
     }
 
     private boolean intersects(MouseEvent event) {

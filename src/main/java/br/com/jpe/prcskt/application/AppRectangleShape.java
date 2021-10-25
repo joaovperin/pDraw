@@ -17,9 +17,6 @@ public class AppRectangleShape extends AppShape implements AppRenderListener {
     @Builder.Default
     int width = 100;
 
-    @Builder.Default
-    private boolean isVisible = true;
-
     @Override
     public void handleDraw(PApplet g) {
         g.pushStyle();

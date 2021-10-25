@@ -49,11 +49,15 @@ public class Application extends PApplet {
         size(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
+    int appFixedListSize;
+
     PdHud hud;
     PdCanvas canvas;
     PdColorPicker colorPicker;
     AppRectangularButton drawCircleButton;
     AppRectangularButton drawRectangleButton;
+    AppRectangularButton drawClearScreenButton;
+    AppRectangularButton undoButton;
 
     Optional<AppPositionedObject> drawingShape = Optional.empty();
 
@@ -88,7 +92,7 @@ public class Application extends PApplet {
                     });
                 }).build();
 
-        drawRectangleButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(160).y(20)
+        drawRectangleButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(140).y(20)
                 .text("Quadrado").onClick(evt -> {
                     drawingShape.ifPresentOrElse(shape -> {
                         drawingShape = Optional.empty();
@@ -102,7 +106,26 @@ public class Application extends PApplet {
                     });
                 }).build();
 
-        appObjects.addAll(List.of(hud, colorPicker, canvas, drawRectangleButton, drawCircleButton));
+        drawClearScreenButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(270).y(10).width(80)
+                .height(25).text("Limpar").onClick(evt -> {
+                    int size;
+                    while ((size = appObjects.size()) > appFixedListSize) {
+                        appObjects.remove(size - 1);
+                    }
+                }).build();
+
+        undoButton = AppRectangularButton.builder().backgroundColor(AppColor.blue).x(270).y(45).width(80).height(25)
+                .text("Desfazer").onClick(evt -> {
+                    final var size = appObjects.size();
+                    if (size > appFixedListSize) {
+                        appObjects.remove(size - 1);
+                    }
+                }).build();
+
+        appObjects.addAll(List.of(hud, colorPicker, canvas, drawRectangleButton, drawCircleButton,
+                drawClearScreenButton, undoButton));
+
+        appFixedListSize = appObjects.size();
     }
 
     @Override

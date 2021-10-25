@@ -23,14 +23,9 @@ public abstract class AppShape implements AppPositionedObject {
     final AppColor textcolor = AppColor.black;
 
     final OnMouseCallback onClick;
-    final OnMouseCallback onHover;
 
     public final Optional<OnMouseCallback> getOnClick() {
         return Optional.ofNullable(onClick);
-    }
-
-    public final Optional<OnMouseCallback> getOnHover() {
-        return Optional.ofNullable(onHover);
     }
 
     @Override
